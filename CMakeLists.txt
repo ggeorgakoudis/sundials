@@ -535,6 +535,11 @@ sundials_option(XBRAID_WORKS BOOL "Set to ON to force CMake to accept a given XB
                 DEPENDS_ON XBRAID_ENABLE
                 ADVANCED)
 
+# ---------------------------------------------------------------
+# Enable Caliper support?
+# ---------------------------------------------------------------
+option(Caliper_ENABLE "Enable Caliper support" OFF)
+
 # ===============================================================
 # Options for examples
 # ===============================================================
@@ -1111,6 +1116,13 @@ if(ENABLE_XBRAID)
   include(SundialsXBRAID)
 endif()
 
+# -------------------------------------------------------------
+# Find Caliper
+# -------------------------------------------------------------
+
+if(Caliper_ENABLE)
+  include(SundialsCaliper)
+endif(Caliper_ENABLE)
 
 # ===============================================================
 # At this point all the configuration options are set.
