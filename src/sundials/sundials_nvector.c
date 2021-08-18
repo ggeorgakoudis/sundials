@@ -23,6 +23,10 @@
 
 #include <sundials/sundials_nvector.h>
 
+#if ENABLE_CALIPER
+#include <caliper/cali.h>
+#endif
+
 /* -----------------------------------------------------------------
  * Create an empty NVector object
  * -----------------------------------------------------------------*/
@@ -313,7 +317,9 @@ void N_VDiv(N_Vector x, N_Vector y, N_Vector z)
 
 void N_VScale(realtype c, N_Vector x, N_Vector z)
 {
+  CALI_MARK_FUNCTION_BEGIN;
   z->ops->nvscale(c, x, z);
+  CALI_MARK_FUNCTION_END;
   return;
 }
 

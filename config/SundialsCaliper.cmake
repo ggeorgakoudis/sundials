@@ -11,14 +11,17 @@
 # SPDX-License-Identifier: BSD-3-Clause
 # SUNDIALS Copyright End
 # ---------------------------------------------------------------------------
-# Locate Caliper and add support
+# Locate Caliper and add support for building
 #
 # Creates the variables:
-#   ENABLE_CALIPER 
+#   ENABLE_CALIPER
 # ---------------------------------------------------------------------------
 
 set(ENABLE_CALIPER TRUE)
 
 find_package(Caliper REQUIRED)
 
-endif()
+add_definitions(-DENABLE_CALIPER)
+include_directories(${caliper_INCLUDE_DIR})
+#add_library(${caliper_LIB_PATH})
+link_libraries(caliper)

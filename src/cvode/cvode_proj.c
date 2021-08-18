@@ -22,6 +22,10 @@
 #include "sundials/sundials_math.h"
 #include "cvode_impl.h"
 
+#if ENABLE_CALIPER
+#include <caliper/cali.h>
+#endif
+
 /* Private constants */
 #define ZERO  RCONST(0.0)  /* real 0.0 */
 #define ONE   RCONST(1.0)  /* real 1.0 */
@@ -295,6 +299,7 @@ int CVodeGetNumProjFails(void *cvode_mem, long int *npfails)
 int cvDoProjection(CVodeMem cv_mem, int *nflagPtr, realtype saved_t,
                    int *npfailPtr)
 {
+  CALI_MARK_FUNCTION_BEGIN;
   int          retval;
   N_Vector     errP;
   N_Vector     acorP;
@@ -371,6 +376,7 @@ int cvDoProjection(CVodeMem cv_mem, int *nflagPtr, realtype saved_t,
   *nflagPtr = PREV_PROJ_FAIL;
   cvRescale(cv_mem);
 
+  CALI_MARK_FUNCTION_END;
   return(PREDICT_AGAIN);
 }
 
